@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gift Wishlist</title>
+</head>
+
+<body>
+    <br><br><br><br>
+    <button onclick="sendOnlineStatus()">Online</button>
+    <button onclick="sendOfflineStatus()">Online</button>
+    <button onclick="sendNotRegisteredStatus()">Not registered</button>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        function sendOnlineStatus() {
+            socket.emit("ping", "Online");
+        }
+
+        socket.on("pong", (secretMessage) => {
+            console.log("Pong", secretMessage);
+        });
+
+        function sendOfflineStatus() {
+            socket.emit("ping", "Offline");
+        }
+        
+        function sendNotRegisteredStatus() {
+            socket.emit("ping", "Not registered");
+        }
+    </script>
+
+</body>
+
+</html>
